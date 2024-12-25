@@ -6,6 +6,7 @@ export interface Game {
     slug: string;
     name: string;
     rating: number;
+    background_image: string;
   }
   
  export interface FetchGamesResponse {
