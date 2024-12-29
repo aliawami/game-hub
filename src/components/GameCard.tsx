@@ -9,14 +9,15 @@ interface GameCardProps {
 }
 const GameCard = ({ game }: GameCardProps) => {
   return (
-    <Card.Root >
+    <Card.Root>
       <Image src={getCroppedImageUrl(game.background_image)} />
       <Card.Body>
         <Heading fontSize={"2xl"}>{game.name}</Heading>
       </Card.Body>
       <HStack justifyContent="space-between">
-        <PlatformIconList platforms={game.platforms.map((p) => p.platform)} />
-
+        {game.platforms && (
+          <PlatformIconList platforms={game.platforms.map((p) => p.platform)} />
+        )}
         <CriticScore score={game.metacritic} />
       </HStack>
     </Card.Root>

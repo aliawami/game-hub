@@ -6,9 +6,19 @@ import {
   FaXbox,
   FaLinux,
   FaAndroid,
+  FaReact,
 } from "react-icons/fa";
 import { MdPhoneIphone } from "react-icons/md";
-import { SiAtari, SiNintendo, SiNintendoswitch, SiPlaystation, SiPlaystation2, SiPlaystation3, SiPlaystation4, SiPlaystation5 } from "react-icons/si";
+import {
+  SiAtari,
+  SiNintendo,
+  SiNintendoswitch,
+  SiPlaystation,
+  SiPlaystation2,
+  SiPlaystation3,
+  SiPlaystation4,
+  SiPlaystation5,
+} from "react-icons/si";
 import { BsGlobe } from "react-icons/bs";
 import { IconType } from "react-icons";
 
@@ -41,14 +51,18 @@ const PlatformIconList = ({ platforms }: PlatformIconListProps) => {
 
   return (
     <HStack marginY={1}>
-      {platforms.map((platform) => (
-        <Icon
-          as={iconMap[platform.slug]}
-          key={platform.id}
-          asChild={false}
-          color={"gray.500"}
-        />
-      ))}
+      {platforms.map((platform) =>
+        platform == null ? (
+          <Icon as={FaReact} asChild={false} color={"gray.500"} />
+        ) : (
+          <Icon
+            as={!iconMap[platform.slug] ? FaReact : iconMap[platform.slug]}
+            key={platform.id}
+            asChild={false}
+            color={"gray.500"}
+          />
+        )
+      )}
     </HStack>
   );
 };
