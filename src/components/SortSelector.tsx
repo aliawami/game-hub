@@ -3,39 +3,42 @@ import { BsChevronBarDown } from "react-icons/bs";
 import { MenuContent, MenuItem, MenuRoot, MenuTrigger } from "./ui/menu";
 // import { Platform } from "../hooks/useGames";
 
-// interface Props {
-//   selectedPlatform: Platform | null;
-//   onSelectPlatform: (platform: Platform) => void;
-// }
+interface Props {
+  selectedSortOrtder: string;
+  onSelectSortOrder: (order: string) => void;
+}
 
-const SortSelector = () => {
-  //   const { data, error } = usePlatform();
-//   if (error) return null;
+const SortSelector = ({ selectedSortOrtder, onSelectSortOrder }: Props) => {
+  const sortOrders = [
+    { value: "", label: "Relevance" },
+    { value: "-added", label: "Date added" },
+    { value: "name", label: "Name" },
+    { value: "-released", label: "Release Date" },
+    { value: "-metacritic", label: "Popularity" },
+    { value: "-rating", label: "Average rating" },
+  ];
+
+  const currentSortOrder = sortOrders.find(
+    (order) => order.value == selectedSortOrtder
+  );
   return (
     <MenuRoot>
       <MenuTrigger>
         <Button variant={"subtle"}>
-          Order by: Relevance
-          {/* Order by: {selectedPlatform?.name || "Relevance"} */}
+          Order by: {currentSortOrder?.label || "Relevance"}
           <BsChevronBarDown />
         </Button>
       </MenuTrigger>
       <MenuContent>
-        <MenuItem value="Relevance">Relevance</MenuItem>
-        <MenuItem value="Date added">Date added</MenuItem>
-        <MenuItem value="Name">Name</MenuItem>
-        <MenuItem value="Release Date">Release Date</MenuItem>
-        <MenuItem value="Popularity">Popularity</MenuItem>
-        <MenuItem value="Average rating">Average rating</MenuItem>
-        {/* {data.map((platform) => (
+        {sortOrders.map((order) => (
           <MenuItem
-            key={platform.id}
-            value={platform.name}
-            onClick={() => onSelectPlatform(platform)}
+            key={order.value}
+            value={order.value}
+            onClick={() => onSelectSortOrder(order.value)}
           >
-            {platform.name}
+            {order.label}
           </MenuItem>
-        ))} */}
+        ))}
       </MenuContent>
     </MenuRoot>
   );
