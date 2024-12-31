@@ -14,6 +14,7 @@ export interface GameQuery {
   platform: Platform | null;
   sortOrder: string;
   searchText: string;
+  page: number | null;
 }
 
 function App() {
@@ -58,7 +59,10 @@ function App() {
             />
           </HStack>
         </Box>
-        <GameGrid gameQuery={gameQuery} />
+        <GameGrid
+          gameQuery={gameQuery}
+          // onPageSelected={(page) => setGameQuery({ ...gameQuery, page })}
+        />
       </GridItem>
     </Grid>
   );

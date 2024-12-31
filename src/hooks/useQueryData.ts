@@ -4,24 +4,18 @@ import apiClient from "../services/apiClient";
 import { FetchResponse } from "./useData";
 
 
-const useQueryData=<T>(endpoint: string, requestConfig?: AxiosRequestConfig,)=>{
+const useQueryData=<T>(endpoint: string, requestConfig?: AxiosRequestConfig, deps?: unknown[])=>{
 
-    const fetchData = <T>()=>
+    const fetchData = ()=>
         apiClient
                       .get<FetchResponse<T>>(endpoint, { ...requestConfig})
-                      .then((res) => res.data.results
+                      .then((res) => res.data
                         );
-
-   const {data, isLoading, error} = useQuery<T[], Error>({
-        queryKey:[endpoint],
-        queryFn: fetchData
-        
+   return useQuery<FetchResponse<T>, Error>({
+        queryKey:deps ? [endpoint,  [...deps]] : [endpoint],
+        queryFn: fetchData,
+        staleTime: 10 * 1000
     });
-
-    return {data, isLoading, error}
-
-
-    
 
 }
 
