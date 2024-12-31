@@ -1,9 +1,10 @@
-import useData from "./useData";
+// import useData from "./useData";
 import { Platform } from "./useGames";
+import useQueryData from "./useQueryData";
 
 
 
 
-const usePlatform=()=> useData<Platform>("/platforms/lists/parents");
+const usePlatform=()=> useQueryData<Platform>("/platforms/lists/parents");
 
 export default usePlatform
