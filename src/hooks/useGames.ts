@@ -1,6 +1,6 @@
 
 import { GameQuery } from "../App";
-import useInfintQueryData from "./useInfintQueryData";
+import useQueryData from "./useQueryData";
 
 export interface Platform{
     id: number,
@@ -24,7 +24,7 @@ export interface Game {
 //    platforms:gameQuery.platform?.id,
 //    ordering:gameQuery.sortOrder, search:gameQuery.searchText}}, [gameQuery]); 
 
-const useGames=(gameQuery: GameQuery)=>useInfintQueryData<Game>("/games", {params: { genres: gameQuery.genre?.id,
+const useGames=(gameQuery: GameQuery)=>useQueryData<Game>("/games", {params: { genres: gameQuery.genre?.id,
   platforms:gameQuery.platform?.id,
   ordering:gameQuery.sortOrder, search:gameQuery.searchText, page: gameQuery.page}}, [gameQuery]); 
 

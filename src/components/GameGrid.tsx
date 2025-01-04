@@ -31,14 +31,12 @@ const GameGrid = ({ gameQuery }: Props) => {
               <GameCardSkeleton />{" "}
             </GameCardContainer>
           ))}
-        {data?.pages.map((groups) =>
-          groups.results.map((game) => (
-            <GameCardContainer key={game.id}>
-              {" "}
-              <GameCard game={game} />
-            </GameCardContainer>
-          ))
-        )}
+        {data?.map((game) => (
+          <GameCardContainer key={game.id}>
+            {" "}
+            <GameCard game={game} />
+          </GameCardContainer>
+        ))}
         {/* {data?.results.map((game) => (
           <GameCardContainer key={game.id}>
             {" "}

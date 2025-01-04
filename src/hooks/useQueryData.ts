@@ -9,12 +9,12 @@ const useQueryData=<T>(endpoint: string, requestConfig?: AxiosRequestConfig, dep
     const fetchData = ()=>
         apiClient
                       .get<FetchResponse<T>>(endpoint, { ...requestConfig})
-                      .then((res) => res.data
+                      .then((res) => res.data.results
                         );
-   return useQuery<FetchResponse<T>, Error>({
+   return useQuery<T[], Error>({
         queryKey:deps ? [endpoint,  [...deps]] : [endpoint],
         queryFn: fetchData,
-        staleTime: 10 * 1000
+        staleTime: 10 * 1000,
     });
 
 }
